@@ -7,7 +7,7 @@ import { setSearchField } from "./actions";
 
 const mapStateToProps = state => {
     return{
-        searchfield: state.searchRobots.searchField
+        searchField: state.searchField
     }
 }
 const mapDispatchToProps = (dispatch)=>{
@@ -35,18 +35,16 @@ class App extends Component {
             }
         )
         }
-    onSearchChange = (event) => {
-        this.setState(
-            {searchfield:event.target.value});
-    }
+    
     render() {
+        const { searchField, onSearchChange } = this.props
         const filteredRobots = this.state.robots.filter(robots => {
-            return robots.name.toLowerCase().includes(this.state.searchfield.toLowerCase());
+            return robots.name.toLowerCase().includes(searchField.toLowerCase());
         })
         return (
             <div className="tc">
                 <h1 className="f1">Robofriends</h1>
-                <SearchBox searchChange={this.onSearchChange}/>
+                <SearchBox searchChange={onSearchChange}/>
                 <CardList robots={filteredRobots}/>
             </div>
         )
